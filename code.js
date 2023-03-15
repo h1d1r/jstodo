@@ -9,6 +9,7 @@ function listeyeEkle(){
         eklenen=document.createElement("li");
         document.getElementById("listeYapilacaklar").appendChild(eklenen);
         eklenen.innerHTML=girilen;
+        document.getElementById("txtYapilacaklar").value = "";
 
             btnTamamla=document.createElement("img");
             eklenen.appendChild(btnTamamla);
@@ -28,7 +29,7 @@ function listeyeEkle(){
     }else alert("Boş Bırakılamaz")
 
     }
-    
+
     function sil(){
         secilen=event.currentTarget.parentNode;
         secilen.remove();
