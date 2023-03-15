@@ -9,7 +9,7 @@ function listeyeEkle(){
         eklenen=document.createElement("li");
         document.getElementById("listeYapilacaklar").appendChild(eklenen);
         eklenen.innerHTML=girilen;
-        document.getElementById("txtYapilacaklar").value = "";
+        document.getElementById("txtYapilacaklar").value = ""; 
 
             btnTamamla=document.createElement("img");
             eklenen.appendChild(btnTamamla);
@@ -27,9 +27,9 @@ function listeyeEkle(){
             console.log(btnSil);
 
     }else alert("Boş Bırakılamaz")
-
+    
     }
-
+    
     function sil(){
         secilen=event.currentTarget.parentNode;
         secilen.remove();
@@ -47,5 +47,4 @@ function listeyeEkle(){
         sil();
         document.getElementById("sonuc").innerHTML="Seçiminiz taşındı!";
     }
-
 

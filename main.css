@@ -4,7 +4,7 @@
 }
 form,span{
     margin: auto;
-    width: 80%;
+    width: 90%;
     border: thin solid black;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -14,7 +14,7 @@ form,span{
 
 input[type=button],input[type=text]{
 
-    margin: 0.25rem;
+    margin: 0.55rem;
 }
 select{
     max-width: 150px;
@@ -25,10 +25,9 @@ h3,h4,h5,li{
     text-align: center;
 }
 .baslik{
-    background: url(images/boy.png) no-repeat 20% center/5%,url(images/girl.png) no-repeat 85% center/10%;
+   
     display: block;
-    width: 80%;
-    line-height: 60px;
+    width: 90%;
     border: thin solid black;
     margin: auto;
     padding: 25px 0;
