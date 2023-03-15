@@ -26,6 +26,8 @@ function listeyeEkle(){
             console.log(btnSil);
 
     }else alert("Boş Bırakılamaz")
+
+    }
     
     function sil(){
         secilen=event.currentTarget.parentNode;
@@ -46,4 +48,3 @@ function listeyeEkle(){
     }
 
 
-}
