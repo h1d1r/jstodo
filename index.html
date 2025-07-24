@@ -1,35 +1,74 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Yapılacaklar Listesi</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="code.js"></script>
+    <meta charset="UTF-8" />
+    <title>Firebase Veri Yaz/Okuma</title>
   </head>
   <body>
-    <h3 class="baslik">YAPILACAKLAR LİSTESİ</h3>
-    <form action="" id="formYapilacaklar">
-      <input type="text" name="" id="txtYapilacaklar" />
-      <input
-        type="button"
-        value="Yapılacaklar Listesine Ekle"
-        id="btnEkle"
-        onclick="listeyeEkle();"
-      />
-    </form>
-    <span>
-      <h4>Yapılacaklar</h4>
-      <h4>Tamamlananlar</h4>
-      <ul id="listeYapilacaklar">
-        <!--Boş Liste-->
-      </ul>
+    <h1>ESP32 ile Ortak Firebase DB</h1>
 
-      <ul id="listeTamamlananlar">
-        <!--Boş Liste-->
-      </ul>
-    </span>
-    <h5 id="sonuc"></h5>
+    <input type="text" id="veri" placeholder="Veri girin" />
+    <button onclick="veriYaz()">Veriyi Yaz</button>
+    <button onclick="veriOku()">Veriyi Oku</button>
+
+    <p id="okunanVeri"></p>
+
+    <script type="module">
+      // Firebase modüllerini içe aktar
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        set,
+        get,
+        child,
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+      // Firebase yapılandırman
+      const firebaseConfig = {
+        apiKey: "AIzaSyAfI_lfLsHDj55mg1DsIiGJODH_zi8oeTU",
+        authDomain: "btnkapi.firebaseapp.com",
+        databaseURL:
+          "https://btnkapi-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "btnkapi",
+        storageBucket: "btnkapi.appspot.com",
+        messagingSenderId: "885082585202",
+        appId: "1:885082585202:web:b624bdc3c4d21314126aeb",
+      };
+
+      // Firebase başlat
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      // Veriyi yaz
+      window.veriYaz = function () {
+        const veri = document.getElementById("veri").value;
+        set(ref(db, "ekran/yazi"), veri)
+          .then(() => {
+            alert("Veri başarıyla yazıldı!");
+          })
+          .catch((error) => {
+            alert("Hata: " + error.message);
+          });
+      };
+
+      // Veriyi oku
+      window.veriOku = function () {
+        const dbRef = ref(db);
+        get(child(dbRef, "ekran/yazi"))
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              document.getElementById("okunanVeri").innerText =
+                "Okunan veri: " + snapshot.val();
+            } else {
+              document.getElementById("okunanVeri").innerText =
+                "Veri bulunamadı.";
+            }
+          })
+          .catch((error) => {
+            alert("Hata: " + error.message);
+          });
+      };
+    </script>
   </body>
 </html>
